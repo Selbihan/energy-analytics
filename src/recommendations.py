@@ -5,6 +5,7 @@ def generate_energy_recommendations(df, hourly_consumption=None):
 
     top_hours = hourly_consumption.nlargest(3)
     recommendations.append("🔴 YÜKSEK TÜKETİM SAATLERİ:")
+    
     for hour, val in top_hours.items():
         recommendations.append(f"• Saat {hour}:00: {val:.2f} kW")
     recommendations.append("➜ Bu saatlerde büyük cihazları kullanmayın!")

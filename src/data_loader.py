@@ -11,7 +11,7 @@ def load_and_preprocess_data(path):
         low_memory=False
     )
 
-    df = df.fillna(method='ffill')
+    df = df.ffill()
 
     z_scores = np.abs((df['Global_active_power'] - df['Global_active_power'].mean()) / df['Global_active_power'].std())
     df = df[z_scores < 3]

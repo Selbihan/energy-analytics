@@ -16,6 +16,7 @@ def plot_predictions(y_test, y_pred_test, sample_size=500):
     plt.tight_layout()
     plt.savefig('predictions_visualization.png')
 
+
 def plot_hourly_consumption(df):
     hourly = df.groupby('hour')['Global_active_power'].mean()
     plt.figure(figsize=(12,6))
