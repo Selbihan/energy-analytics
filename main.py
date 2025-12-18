@@ -4,11 +4,11 @@ from src.model import train_random_forest
 from src.visualization import plot_predictions, plot_hourly_consumption
 from src.recommendations import generate_energy_recommendations
 from src.future_prediction import predict_future_consumption
+import joblib
 
-df = load_and_preprocess_data('data/raw/household_power_consumption.csv')
+df = load_and_preprocess_data('data/raw/household_power_consumption.txt')
 
 correlation_analysis(df, 'Global_active_power')
-
 importance = random_forest_feature_importance(df, 'Global_active_power')
 selected_features = importance[importance['importance'] > 0.02]['feature'].tolist()
 
@@ -24,5 +24,10 @@ hourly = plot_hourly_consumption(df)
 recommendations = generate_energy_recommendations(df, hourly)
 print(recommendations)
 
-last_sample = X_test[-1]
+
+last_sample = X_test[-1].reshape(1, -1)
 predict_future_consumption(model, last_sample, hours_ahead=24)
+
+
+joblib.dump(model, 'energy_model.joblib')
+print("✓ Model kaydedildi: energy_model.joblib")

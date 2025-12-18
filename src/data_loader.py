@@ -5,11 +5,12 @@ def load_and_preprocess_data(path):
     df = pd.read_csv(
         path,
         sep=';',
-        parse_dates={'datetime': ['Date', 'Time']},
         dayfirst=True,
         na_values='?',
         low_memory=False
     )
+
+    df['datetime'] = pd.to_datetime(df['Date'] + ' ' + df['Time'], dayfirst=True)
 
     df = df.ffill()
 
@@ -26,7 +27,6 @@ def load_and_preprocess_data(path):
         lambda h: 1 if 6 <= h < 12 else 2 if 12 <= h < 18 else 3 if 18 <= h < 22 else 4
     )
 
-
     df['power_lag_1'] = df['Global_active_power'].shift(1)
     df['power_lag_24'] = df['Global_active_power'].shift(24)
     df['power_lag_168'] = df['Global_active_power'].shift(168)
@@ -34,4 +34,5 @@ def load_and_preprocess_data(path):
     df['power_rolling_std_24'] = df['Global_active_power'].rolling(24).std()
 
     df = df.dropna()
+
     return df

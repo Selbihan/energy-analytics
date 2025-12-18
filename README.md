@@ -250,16 +250,6 @@ RandomForestRegressor(
 - **Yıllık mali kazanç**: ~2,500 TL
 - **CO₂ azaltımı**: ~500 kg/yıl
 
-## 📸 Ekran Görüntüleri
-
-### Tahmin Grafiği
-![Tahmin Grafiği](predictions_visualization.png)
-
-### Saatlik Tüketim
-![Saatlik Tüketim](hourly_consumption.png)
-
-### Özellik Önemi
-![Özellik Önemi](feature_importance.png)
 
 ## 🗺️ Geliştirme Roadmap
 
